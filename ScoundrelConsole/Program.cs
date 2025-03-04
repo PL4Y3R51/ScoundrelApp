@@ -1,5 +1,6 @@
 ﻿using ScoundrelCore.Data;
 using ScoundrelCore.Engine;
+using ScoundrelCore.Engine.Contract;
 using ScoundrelCore.Enum;
 using System.Net.WebSockets;
 using System.Numerics;
@@ -39,7 +40,7 @@ R for Rules.
 
         public static void PlayGame()
         {
-            GameEngine gameEngine = new GameEngine();
+            IGameEngine gameEngine = new GameEngine();
 
             gameEngine.StartGame();
             Console.OutputEncoding = System.Text.Encoding.UTF8;

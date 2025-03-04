@@ -1,4 +1,7 @@
-﻿@inherits LayoutComponentBase
+﻿@using ScoundrelCore.Engine.Contract;
+@inherits LayoutComponentBase
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 <div class="page">
     <main>
         <article class="content px-4">
@@ -10,20 +13,20 @@
         <nav class="d-flex justify-content-center">
             <div class="w-100 bg-info">
                 <div class="nav-link text-white text-center" href="counter">
-                    <span class="fa-solid fa-question" aria-hidden="true"></span> Nothing yet
+                    <span class="bi bi-question-lg fs-2" aria-hidden="true"></span>
                 </div>
             </div>
 
             <div class="w-100 btn-info">
                 <NavLink class="nav-link text-white text-center" href="" Match="NavLinkMatch.All">
-                    <span class="fa-solid fa-khanda" aria-hidden="true"></span> Home
+                    <span class="bi bi-joystick fs-2" aria-hidden="true"></span>
                 </NavLink>
             </div>
 
 
             <div class="w-100 btn-info">
                 <NavLink class="nav-link text-white text-center" href="rules">
-                    <span class="fa-solid fa-book" aria-hidden="true"></span> Rules
+                    <span class="bi bi-book fs-2" aria-hidden="true"></span>
                 </NavLink>
             </div>
         </nav>

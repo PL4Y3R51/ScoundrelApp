@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using ScoundrelHybrid.Shared.Services;
 using ScoundrelHybrid.Services;
+using ScoundrelCore.Engine.Contract;
+using ScoundrelCore.Engine;
 
 namespace ScoundrelHybrid;
 
@@ -18,6 +20,7 @@ public static class MauiProgram
 
         // Add device-specific services used by the ScoundrelHybrid.Shared project
         builder.Services.AddSingleton<IFormFactor, FormFactor>();
+        builder.Services.AddSingleton<IGameEngine, GameEngine>();
 
         builder.Services.AddMauiBlazorWebView();
 

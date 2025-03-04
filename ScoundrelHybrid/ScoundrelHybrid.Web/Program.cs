@@ -1,6 +1,8 @@
 using ScoundrelHybrid.Web.Components;
 using ScoundrelHybrid.Shared.Services;
 using ScoundrelHybrid.Web.Services;
+using ScoundrelCore.Engine.Contract;
+using ScoundrelCore.Engine;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,7 @@ builder.Services.AddRazorComponents()
 
 // Add device-specific services used by the ScoundrelHybrid.Shared project
 builder.Services.AddSingleton<IFormFactor, FormFactor>();
+builder.Services.AddScoped<IGameEngine, GameEngine>();
 
 var app = builder.Build();
 

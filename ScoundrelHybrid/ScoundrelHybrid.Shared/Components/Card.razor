@@ -1,0 +1,22 @@
+﻿@using ScoundrelCore.Data
+@using ScoundrelCore.Engine.Contract
+@inject IGameEngine GameEngine
+
+<div onclick="@PlayCard" class="custom-card rounded @(IsWeapon ? "bg-dark" : "bg-light") m-1 d-flex flex-column justify-content-center align-items-center">
+    @switch (CardData.Suit)
+    {
+        case Suit.Clubs:
+            <i class="bi bi-suit-club-fill fs-1"></i>
+            break;
+        case Suit.Diamonds:
+            <i class="bi bi-suit-diamond-fill fs-1 text-danger"></i>
+            break;
+        case Suit.Hearts:
+            <i class="bi bi-suit-heart-fill fs-1 text-danger"></i>
+            break;
+        case Suit.Spades:
+            <i class="bi bi-suit-spade-fill fs-1"></i>
+            break;
+    }
+    <span class="@((CardData.Suit == Suit.Hearts || CardData.Suit == Suit.Diamonds) ? "text-danger" : "") fw-bold">@CardData.Value</span>
+</div>

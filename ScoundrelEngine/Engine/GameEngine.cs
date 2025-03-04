@@ -1,4 +1,5 @@
 ﻿using ScoundrelCore.Data;
+using ScoundrelCore.Engine.Contract;
 using ScoundrelCore.Enum;
 using ScoundrelCore.Helpers;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ScoundrelCore.Engine
 {
-    public class GameEngine
+    public class GameEngine : IGameEngine
     {
         public GameState GameState { get; private set; } = GameState.Unknown;
         public Player Player { get; private set; } = new Player();
