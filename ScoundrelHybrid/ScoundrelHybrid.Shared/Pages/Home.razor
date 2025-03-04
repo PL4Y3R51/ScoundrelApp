@@ -1,47 +1,54 @@
 ﻿@page "/"
 @using ScoundrelCore.Data;
 @using ScoundrelCore.Engine.Contract;
-@using ScoundrelHybrid.Shared.Services
-@inject IFormFactor FormFactor
+@using ScoundrelCore.Enum;
 @inject IGameEngine GameEngine
 
 <PageTitle>Scoundrel</PageTitle>
 
-<h1>Scoundrel</h1>
 
+@if (GameEngine.GameState == GameState.Unknown)
+{
+    <div class="d-flex flex-column justify-content-center align-items-center w-50">
+        <ScoundrelHybrid.Shared.Components.Title>Scoundrel</ScoundrelHybrid.Shared.Components.Title>
+        <div style="min-height: 25%"></div>
+        <div class="btn btn-outline-info my-auto w-75" @onclick="GameEngine.StartGame">Start Game</div>
+    </div>
+}
+else
+{
+    <div class="btn btn-outline-info" @onclick="GameEngine.StartGame">Restart Game</div>
 
-<div class="btn btn-outline-info" @onclick="GameEngine.StartGame">Start Game</div>
+    <p>@GameEngine.GameState</p>
 
-<p>@GameEngine.GameState</p>
+    <div class="d-flex justify-content-center flex-wrap">
+        @foreach (Card card in GameEngine.Room)
+        {
+            <ScoundrelHybrid.Shared.Components.Card CardData="@card" OnCardPlayed="StateHasChanged" />
+        }
 
-<div class="d-flex justify-content-center flex-wrap">
-    @foreach (Card card in GameEngine.Room)
-    {
-        <ScoundrelHybrid.Shared.Components.Card CardData="@card" />
-    }
+    </div>
 
-</div>
+    <hr />
 
-<hr />
-
-<div class="d-flex justify-content-center flex-wrap">
-    @if (GameEngine.Player.Weapon != null)
-    {
-        <ScoundrelHybrid.Shared.Components.Card CardData="@GameEngine.Player.Weapon" IsWeapon="true" />
-    }
-    else
-    {
-        <div class="custom-card rounded bg-light m-1 fw-bold text-center align-content-center">No weapon</div>
-    }
-    <div class="custom-card rounded m-1"></div>
-    <div class="custom-card rounded m-1"></div>
-    @if (GameEngine.Player.Weapon != null)
-    {
-        <ScoundrelHybrid.Shared.Components.Card CardData="@GameEngine.Player.PreviousMonsterForWeapon"/>
-    }
-    else
-    {
-        <div class="custom-card rounded bg-light m-1 fw-bold text-center align-content-center">No previous ennemy killed by weapon</div>
-    }
-</div>
-Welcome to your new app running on <em>@factor</em> using <em>@platform</em>.
+    <div class="d-flex justify-content-center flex-wrap">
+        @if (GameEngine.Player.Weapon != null)
+        {
+            <ScoundrelHybrid.Shared.Components.Card CardData="@GameEngine.Player.Weapon" IsWeapon="true" />
+        }
+        else
+        {
+            <div class="custom-card rounded bg-light m-1 fw-bold text-center align-content-center">No weapon</div>
+        }
+        <div class="custom-card rounded m-1"></div>
+        <div class="custom-card rounded m-1"></div>
+        @if (GameEngine.Player.PreviousMonsterForWeapon != null)
+        {
+            <ScoundrelHybrid.Shared.Components.Card CardData="@GameEngine.Player.PreviousMonsterForWeapon" />
+        }
+        else
+        {
+            <div class="custom-card rounded bg-light m-1 fw-bold text-center align-content-center">No previous ennemy killed by weapon</div>
+        }
+    </div>
+}
