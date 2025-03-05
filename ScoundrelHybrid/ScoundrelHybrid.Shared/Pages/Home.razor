@@ -8,27 +8,49 @@
 
 
 
-    @if (GameEngine.GameState == GameState.Unknown)
-    {
+@if (GameEngine.GameState == GameState.Unknown)
+{
     <div class="d-flex w-100">
         <div class="d-flex flex-column justify-content-center align-items-center w-100">
             <ScoundrelHybrid.Shared.Components.Title>Scoundrel</ScoundrelHybrid.Shared.Components.Title>
             <div class="btn btn-outline-info my-auto w-25" @onclick="GameEngine.StartGame">Start Game</div>
         </div>
     </div>
-    }
-    else
-    {
-        <div class="d-flex w-100 mb-auto">
-            <div>
-                <ScoundrelHybrid.Shared.Layout.ActionMenu OnAction="StateHasChanged" />
-            </div>
-            <div class="d-flex flex-column justify-content-center align-items-center" style="flex: 1">
-                <div class="btn btn-outline-info" @onclick="GameEngine.StartGame">Restart Game</div>
+}
+else
+{
+    <div class="d-flex w-100 mb-auto">
+        <div>
+            <ScoundrelHybrid.Shared.Layout.ActionMenu OnAction="StateHasChanged" />
+        </div>
+        <div class="d-flex flex-column justify-content-center align-items-center" style="flex: 1">
 
-                <p>@GameEngine.GameState</p>
+            @if (GameEngine.GameState == GameState.Failure)
+            {
+                <h1>YOU LOSE</h1>
 
-                <div class="d-flex justify-content-center flex-wrap">
+                <div class="btn btn-outline-info my-auto w-25" @onclick="GameEngine.StartGame">Retry</div>
+
+            }
+
+            @if (GameEngine.GameState == GameState.Success)
+            {
+                <h1>YOU WIN</h1>
+
+                <div class="btn btn-outline-info my-auto w-25" @onclick="GameEngine.StartGame">Start a new run</div>
+
+            }
+
+            @if (GameEngine.GameState == GameState.Playing)
+            {
+
+
+                <div class="d-flex">
+                    <div class="badge bg-success mx-1">CARDS - @(GameEngine.Dungeon.Count + GameEngine.Room.Count) / 42</div>
+                    <div class="badge bg-success mx-1">ROOMS - @(GameEngine.RoomNbr) / 14</div>
+                </div>
+
+                <div class="d-flex justify-content-center flex-wrap m-3">
                     @foreach (Card card in GameEngine.Room)
                     {
                         <ScoundrelHybrid.Shared.Components.Card CardData="@card" OnCardPlayed="StateHasChanged" />
@@ -36,28 +58,33 @@
 
                 </div>
 
-                <hr />
 
                 <div class="d-flex justify-content-center flex-wrap">
                     @if (GameEngine.Player.Weapon != null)
                     {
-                        <ScoundrelHybrid.Shared.Components.Card CardData="@GameEngine.Player.Weapon" IsWeapon="true" />
+                        <ScoundrelHybrid.Shared.Components.Card CardData="@GameEngine.Player.Weapon" IsWeapon="true" IsReadOnly=true />
                     }
                     else
                     {
                         <div class="custom-card rounded bg-light m-1 fw-bold text-center align-content-center">No weapon</div>
                     }
-                    <div class="custom-card rounded m-1"></div>
-                    <div class="custom-card rounded m-1"></div>
+                    <div class="custom-card m-1"></div>
+                    <div class="custom-card m-1"></div>
                     @if (GameEngine.Player.PreviousMonsterForWeapon != null)
                     {
-                        <ScoundrelHybrid.Shared.Components.Card CardData="@GameEngine.Player.PreviousMonsterForWeapon" />
+                        <ScoundrelHybrid.Shared.Components.Card CardData="@GameEngine.Player.PreviousMonsterForWeapon" IsReadOnly=true />
                     }
                     else
                     {
-                        <div class="custom-card rounded bg-light m-1 fw-bold text-center align-content-center">No previous ennemy killed by weapon</div>
+                        <div class="custom-card rounded bg-light m-1 fw-bold text-center align-content-center fs-6">No previous ennemy</div>
                     }
                 </div>
-            </div>
+
+                <div class="m-1 p-3 rounded bg-danger text-white fw-bold">@GameEngine.Player.Health</div>
+
+                <div @onclick="GameEngine.IsRunawayAvailable ? GameEngine.RunawayFromRoom : null!" class="m-1 p-3 rounded btn btn-primary text-white fw-bold @(GameEngine.IsRunawayAvailable ? "" : "disabled")">RUN</div>
+
+            }
         </div>
-    }
+    </div>
+}

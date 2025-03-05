@@ -44,11 +44,17 @@ namespace ScoundrelCore.Engine
                 DrawCard();
             }
             RoomNbr = 1;
+
+            IsRunawayAvailable = true;
+            isPotionUsedInRoom = false;
+
             GameState = GameState.Playing;
         }
         #region Card Actions
         public void Heal(Card card)
         {
+            IsRunawayAvailable = false;
+
             if (!isPotionUsedInRoom)
             {
                 Player.Health += card.Value;
@@ -67,6 +73,8 @@ namespace ScoundrelCore.Engine
 
         public void EquipWeapon(Card card)
         {
+            IsRunawayAvailable = false;
+
             if (Player.PreviousMonsterForWeapon != null)
             {
                 Discard.Add(Player.PreviousMonsterForWeapon);
@@ -84,6 +92,8 @@ namespace ScoundrelCore.Engine
 
         public void HandFight(Card card)
         {
+            IsRunawayAvailable = false;
+
             Player.Health -= card.Value;
 
             Discard.Add(card);
@@ -94,6 +104,8 @@ namespace ScoundrelCore.Engine
 
         public void WeaponFight(Card card)
         {
+            IsRunawayAvailable = false;
+
             try
             {
                 if (Player.Weapon == null)
@@ -146,6 +158,7 @@ namespace ScoundrelCore.Engine
 
             if (Room.Count == 1)
             {
+                RoomNbr++;
                 ChangeRoom(false);
             }
 
@@ -162,14 +175,19 @@ namespace ScoundrelCore.Engine
         private void ChangeRoom(bool fromRunaway)
         {
             isPotionUsedInRoom = false;
-            RoomNbr++;
 
             while (Room.Count < 4 && Dungeon.Count > 0)
             {
                 DrawCard();
             }
-
-            IsRunawayAvailable = fromRunaway == false;
+            if (fromRunaway)
+            {
+                IsRunawayAvailable = false;
+            }
+            else
+            {
+                IsRunawayAvailable = true;
+            }
         }
 
         private List<Card> DefaultCards()
@@ -179,28 +197,28 @@ namespace ScoundrelCore.Engine
             {
                 Card card = new Card();
                 card.Value = i;
-                card.Suit = Suit.Clubs;
+                card.Suit = Suit.Club;
                 cards.Add(card);
             }
             for (int i = 2; i < 15; i++)
             {
                 Card card = new Card();
                 card.Value = i;
-                card.Suit = Suit.Spades;
+                card.Suit = Suit.Spade;
                 cards.Add(card);
             }
             for (int i = 2; i < 10; i++)
             {
                 Card card = new Card();
                 card.Value = i;
-                card.Suit = Suit.Diamonds;
+                card.Suit = Suit.Diamond;
                 cards.Add(card);
             }
             for (int i = 2; i < 10; i++)
             {
                 Card card = new Card();
                 card.Value = i;
-                card.Suit = Suit.Hearts;
+                card.Suit = Suit.Heart;
                 cards.Add(card);
             }
             return cards;

@@ -56,14 +56,14 @@ R for Rules.
 
                     switch (cardPicked.Suit)
                     {
-                        case Suit.Hearts:
+                        case Suit.Heart:
                             gameEngine.Heal(cardPicked);
                             break;
-                        case Suit.Diamonds:
+                        case Suit.Diamond:
                             gameEngine.EquipWeapon(cardPicked);
                             break;
-                        case Suit.Spades:
-                        case Suit.Clubs:
+                        case Suit.Spade:
+                        case Suit.Club:
                             if (gameEngine.Player.Weapon == null)
                             {
                                 gameEngine.HandFight(cardPicked);
@@ -118,7 +118,7 @@ R for Rules.
                 gameEngine.Room.ForEach(card =>
                 {
                     i++;
-                    if (card.Suit == Suit.Diamonds || card.Suit == Suit.Hearts)
+                    if (card.Suit == Suit.Diamond || card.Suit == Suit.Heart)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                     }
@@ -159,7 +159,7 @@ R for Rules.
             Console.WriteLine("\nDUNGEON\n");
             foreach (var card in gameEngine.Dungeon)
             {
-                if (card.Suit == Suit.Diamonds || card.Suit == Suit.Hearts)
+                if (card.Suit == Suit.Diamond || card.Suit == Suit.Heart)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                 }
@@ -177,7 +177,7 @@ R for Rules.
             Console.WriteLine("\nROOM\n");
             foreach (var card in gameEngine.Room)
             {
-                if (card.Suit == Suit.Diamonds || card.Suit == Suit.Hearts)
+                if (card.Suit == Suit.Diamond || card.Suit == Suit.Heart)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                 }
@@ -196,7 +196,7 @@ R for Rules.
 
             foreach (var card in gameEngine.Discard)
             {
-                if (card.Suit == Suit.Diamonds || card.Suit == Suit.Hearts)
+                if (card.Suit == Suit.Diamond || card.Suit == Suit.Heart)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                 }

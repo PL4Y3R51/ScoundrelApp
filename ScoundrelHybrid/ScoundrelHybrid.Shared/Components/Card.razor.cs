@@ -24,6 +24,12 @@ namespace ScoundrelHybrid.Shared.Components
         public bool IsWeapon { get; set; } = false;
 
         [Parameter]
+        public bool IsReadOnly { get; set; } = false;
+
+        [Parameter]
+        public bool IsSmallCard { get; set; } = false;
+
+        [Parameter]
         public EventCallback OnCardPlayed { get; set; }
 
         private bool SelectFightType { get; set; }
@@ -34,22 +40,22 @@ namespace ScoundrelHybrid.Shared.Components
         {
             switch (CardData.Suit)
             {
-                case Suit.Hearts:
+                case Suit.Heart:
                     GameEngine.Heal(CardData);
                     if (OnCardPlayed.HasDelegate)
                     {
                         await OnCardPlayed.InvokeAsync();
                     }
                     break;
-                case Suit.Diamonds:
+                case Suit.Diamond:
                     GameEngine.EquipWeapon(CardData);
                     if (OnCardPlayed.HasDelegate)
                     {
                         await OnCardPlayed.InvokeAsync();
                     }
                     break;
-                case Suit.Spades:
-                case Suit.Clubs:
+                case Suit.Spade:
+                case Suit.Club:
                     if (GameEngine.Player.Weapon == null)
                     {
                         GameEngine.HandFight(CardData);

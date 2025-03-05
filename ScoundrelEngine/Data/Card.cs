@@ -9,10 +9,10 @@ namespace ScoundrelCore.Data
 {
     public enum Suit
     {
-        Spades,
-        Hearts,
-        Clubs,
-        Diamonds
+        Spade,
+        Heart,
+        Club,
+        Diamond
     }
     public class Card
     {
@@ -54,19 +54,19 @@ namespace ScoundrelCore.Data
             var unicode = "";
             switch (suit)
             {
-                case Suit.Spades:
+                case Suit.Spade:
                     unicode = "\u2660";
                     break;
 
-                case Suit.Clubs:
+                case Suit.Club:
                     unicode = "\u2663";
                     break;
 
-                case Suit.Hearts:
+                case Suit.Heart:
                     unicode = "\u2665";
                     break;
 
-                case Suit.Diamonds:
+                case Suit.Diamond:
                     unicode = "\u2666";
                     break;
 

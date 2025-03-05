@@ -1,32 +1,19 @@
 ﻿@using ScoundrelCore.Data
 
-<div @onclick="PlayCard" class="custom-card rounded @(IsWeapon ? "bg-dark" : "bg-light") m-1 d-flex flex-column justify-content-center align-items-center">
-    @switch (CardData.Suit)
-    {
-        case Suit.Clubs:
-            <i class="bi bi-suit-club-fill fs-1"></i>
-            break;
-        case Suit.Diamonds:
-            <i class="bi bi-suit-diamond-fill fs-1 text-danger"></i>
-            break;
-        case Suit.Hearts:
-            <i class="bi bi-suit-heart-fill fs-1 text-danger"></i>
-            break;
-        case Suit.Spades:
-            <i class="bi bi-suit-spade-fill fs-1"></i>
-            break;
-    }
-    <span class="@((CardData.Suit == Suit.Hearts || CardData.Suit == Suit.Diamonds) ? "text-danger" : "") fw-bold">@CardData.Value</span>
+<div @onclick="IsReadOnly ? null! : PlayCard" class=" @(IsSmallCard ? "custom-small-card " : "custom-card ") rounded @(IsWeapon ? "bg-dark" : "bg-light") @(IsReadOnly ? "" : "cursor-pointer") m-1 d-flex flex-column justify-content-center align-items-center">
+    
+    <i class="bi bi-suit-@CardData.Suit.ToString().ToLower()-fill @(IsSmallCard ? "fs-6" : "fs-1") @((CardData.Suit == Suit.Heart || CardData.Suit == Suit.Diamond) ? "text-danger" : "")"></i>
+    <span class="@((CardData.Suit == Suit.Heart || CardData.Suit == Suit.Diamond) ? "text-danger" : "")  fw-bold">@CardData.Value</span>
 </div>
 
 <Popup @ref="FightPopup">
     <div class="d-flex justify-content-center flex-wrap">
-        <div onclick="@(() => FightWithChoice(false))" class="custom-card rounded bg-light m-1 d-flex flex-column justify-content-center align-items-center">
+        <div onclick="@(() => FightWithChoice(false))" class="custom-card-action rounded bg-light m-1 d-flex flex-column justify-content-center align-items-center">
             <i class="bi bi-hand-index fs-1"></i>
             <span class="fw-bold">Handfight</span>
         </div>
 
-        <div onclick="@(() => FightWithChoice(true))" class="custom-card rounded bg-light m-1 d-flex flex-column justify-content-center align-items-center">
+        <div onclick="@(() => FightWithChoice(true))" class="custom-card-action rounded bg-light m-1 d-flex flex-column justify-content-center align-items-center">
             <i class="bi bi-magic fs-1"></i>
             <span class="fw-bold">Weaponfight</span>
         </div>

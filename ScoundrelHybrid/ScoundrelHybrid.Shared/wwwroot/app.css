@@ -50,14 +50,28 @@ h1:focus {
     border-color: #929292;
 }
 
-.custom-card {
+.custom-card-action {
     height: 100px;
     width: 100px;
+}
+
+.custom-card {
+    height: 100px;
+    width: 71px;
+}
+
+.custom-small-card {
+    height: 66px;
+    width: 45px;
 }
 
 .flavors-regular {
     font-family: "Flavors", cursive;
     font-weight: 400;
     font-style: normal;
+}
+
+.cursor-pointer{
+    cursor: pointer;
 }
 

@@ -13,11 +13,21 @@
 </div>
 
 <Popup @ref="DeckInfo">
-    <p>Deck Info</p>
+    <h3>Deck Info</h3>
+    <p>Discarded cards : </p>
+    <div class="d-flex flex-wrap">
+
+        @foreach (ScoundrelCore.Data.Card card in GameEngine.Discard)
+        {
+            <Card CardData="card" IsReadOnly=true IsSmallCard=true />
+        }
+    </div>
+
     <div class="btn btn-danger" @onclick="DeckInfo.CloseModal">Close</div>
 </Popup>
 
 <Popup @ref="Settings">
-    <p>Settings</p>
+    <h3>Settings</h3>
+    <p>No customisation for now</p>
     <div class="btn btn-danger" @onclick="Settings.CloseModal">Close</div>
 </Popup>
