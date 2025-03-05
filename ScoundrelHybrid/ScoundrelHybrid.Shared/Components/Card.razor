@@ -19,7 +19,7 @@
     <span class="@((CardData.Suit == Suit.Hearts || CardData.Suit == Suit.Diamonds) ? "text-danger" : "") fw-bold">@CardData.Value</span>
 </div>
 
-<Popup @ref="FightPopup" Title="Hello Blazor Modal!">
+<Popup @ref="FightPopup">
     <div class="d-flex justify-content-center flex-wrap">
         <div onclick="@(() => FightWithChoice(false))" class="custom-card rounded bg-light m-1 d-flex flex-column justify-content-center align-items-center">
             <i class="bi bi-hand-index fs-1"></i>

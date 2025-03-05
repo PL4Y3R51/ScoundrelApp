@@ -1,0 +1,23 @@
+﻿@using ScoundrelHybrid.Shared.Components
+
+<div class="d-flex flex-column">
+    <div class="btn btn-warning round-btn m-1" @onclick="ActionRestartGame">
+        <i class="bi bi-arrow-clockwise fw-bold fs-3"></i>
+    </div>
+    <div class="btn btn-warning round-btn m-1" @onclick="ActionShowInfoGame">
+        <i class="bi bi-info-circle-fill fw-bold fs-2"></i>
+    </div>
+    <div class="btn btn-warning round-btn m-1" @onclick="ActionShowSettings">
+        <i class="bi bi-gear fw-bold fs-2"></i>
+    </div>
+</div>
+
+<Popup @ref="DeckInfo">
+    <p>Deck Info</p>
+    <div class="btn btn-danger" @onclick="DeckInfo.CloseModal">Close</div>
+</Popup>
+
+<Popup @ref="Settings">
+    <p>Settings</p>
+    <div class="btn btn-danger" @onclick="Settings.CloseModal">Close</div>
+</Popup>

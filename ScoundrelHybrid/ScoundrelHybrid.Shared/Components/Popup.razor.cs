@@ -9,9 +9,9 @@ namespace ScoundrelHybrid.Shared.Components
 {
     public partial class Popup
     {
-        [Parameter] public string Title { get; set; } = "Modal Title";
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public EventCallback OnClose { get; set; }
+        [Parameter] public bool ShowCloseButton { get; set; }
 
         private bool IsVisible { get; set; }
 
@@ -23,7 +23,10 @@ namespace ScoundrelHybrid.Shared.Components
         public async Task CloseModal()
         {
             IsVisible = false;
-            await OnClose.InvokeAsync();
+            if (OnClose.HasDelegate)
+            {
+                await OnClose.InvokeAsync();
+            }
         }
     }
 }
